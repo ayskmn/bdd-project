@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bdd-project" />
+        <module name="com.academy.techcenture" />
       </profile>
     </annotationProcessing>
   </component>

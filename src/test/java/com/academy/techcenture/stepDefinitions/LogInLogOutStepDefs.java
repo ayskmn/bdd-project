@@ -14,7 +14,7 @@ public class LogInLogOutStepDefs {
     private HomePage homePage;
     private LoginPage logInPage;
     @Given("user navigates to home page and page is visible")
-    public void userNavigatesToHomePageAndPageIsVisible() {
+    public void userNavigatesToHomePageAndPageIsVisible() throws InterruptedException {
         homePage = new HomePage(driver);
         homePage.navigate_to_home_page();
     }

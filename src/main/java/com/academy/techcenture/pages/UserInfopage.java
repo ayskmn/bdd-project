@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class UserInfopage extends BasePage{
 
-
     public UserInfopage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver,this);

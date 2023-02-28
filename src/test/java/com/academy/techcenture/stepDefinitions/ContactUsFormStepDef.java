@@ -44,7 +44,7 @@ public class ContactUsFormStepDef {
     @When("user uploads a file")
     public void user_uploads_a_file() {
 
-        String filePath = "/Users/marynagrabchuk/Desktop/JavaNotes/Map.pages";
+        String filePath = "/Users/ayse/Desktop/cat03.jpg";
         contactUsPage.uploadFile(filePath);
     }
     @When("user clicks on a submit button")

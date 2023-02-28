@@ -13,7 +13,7 @@ public class LogInWithExistEmailStepDef {
     private HomePage homePage;
     private LoginPage logInPage;
     @Given("user is on the homePage")
-    public void user_is_on_the_home_page() {
+    public void user_is_on_the_home_page() throws InterruptedException {
         homePage = new HomePage(driver);
         homePage.navigate_to_home_page();
     }
