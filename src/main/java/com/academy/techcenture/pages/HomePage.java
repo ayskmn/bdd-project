@@ -51,11 +51,11 @@ public class HomePage extends BasePage{
         productsBtn.click();
     }
     public void closeAd() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         driver.switchTo().frame(parentIframe);
         driver.switchTo().frame(iframe);
         driver.findElement(By.xpath("//div[@id='dismiss-button']/div/span")).click();
         driver.switchTo().defaultContent();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
     }
 }
