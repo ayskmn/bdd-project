@@ -11,7 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class SearchProductStepDef {
-    private WebDriver driver = Driver.getDriver();
+    private final WebDriver driver = Driver.getDriver();
     private HomePage homePage;
     private ProductPage productPage;
     @Given("user navigates to the home page")

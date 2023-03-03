@@ -21,7 +21,7 @@ public class HomePage extends BasePage{
     private WebElement dismissBtn;
     @FindBy(xpath = "//iframe[@title='Advertisement']")
     private WebElement iframe;
-    @FindBy(xpath = "//iframe[@id='aswift_9']")
+    @FindBy(xpath = "//iframe[@id='aswift_5']")
     private WebElement parentIframe;
     @FindBy(xpath = "//a[text()=' Logged in as ']")
     private WebElement loginAsUserText;
@@ -32,6 +32,20 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//a[text()=' Products']")
     private WebElement productsBtn;
 
+    @FindBy(xpath="//h2[text()='Subscription']")
+    private WebElement subscriptionText;
+
+    @FindBy(xpath="//input[@id='susbscribe_email']")
+    private WebElement subscribeInput;
+
+    @FindBy(xpath="//button[@id='subscribe']")
+    private WebElement subscribeBtn;
+
+    @FindBy(xpath="//div/div/div[contains(@class,  'alert-success')]")
+    private WebElement successMsgBox;
+
+    @FindBy(xpath="//a[text()=' Cart']")
+    private WebElement cartLink;
     public void clickOnSingInSignUpBtn(){
         singInSignUpButton.click();
     }
@@ -57,5 +71,19 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//div[@id='dismiss-button']/div/span")).click();
         driver.switchTo().defaultContent();
         Thread.sleep(5000);
+    }
+
+    public void verifySubscriptionText(){
+        Assert.assertTrue(subscriptionText.isDisplayed());
+    }
+    public void enterEmailAndSubsribe(){
+        subscribeInput.sendKeys(ConfigReader.getProperty("email1"));
+        subscribeBtn.click();
+    }
+    public void verifySuccessMsgIsVisible(){
+        Assert.assertTrue(successMsgBox.getText().equalsIgnoreCase("You have been successfully subscribed!"));
+    }
+    public void clickOnCartLink(){
+        cartLink.click();
     }
 }

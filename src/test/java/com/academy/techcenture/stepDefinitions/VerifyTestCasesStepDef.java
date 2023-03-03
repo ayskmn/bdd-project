@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 
 public class VerifyTestCasesStepDef {
-    private WebDriver driver = Driver.getDriver();
+    private final WebDriver driver = Driver.getDriver();
     private HomePage homePage;
     VerifyTestCasesPage verifyTestCasesPage;
 

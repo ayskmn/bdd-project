@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CreateUser {
-    private static WebDriver driver = Driver.getDriver();
+    private WebDriver driver = Driver.getDriver();
     private HomePage homePage;
     private LoginPage logInPage;
     private UserInfopage userInfopage;

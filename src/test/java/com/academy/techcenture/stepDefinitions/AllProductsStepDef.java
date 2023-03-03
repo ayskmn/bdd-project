@@ -15,8 +15,9 @@ public class AllProductsStepDef {
     private ProductPage productPage;
     private ProductDetailPage productDetailPage;
     @Given("user is on the HomePage")
-    public void user_is_on_the_home_page() {
+    public void user_is_on_the_home_page() throws InterruptedException {
         homePage = new HomePage(driver);
+//        homePage.closeAd();
         homePage.navigate_to_home_page();
         homePage.verifyUserIsOnAHomePage();
     }

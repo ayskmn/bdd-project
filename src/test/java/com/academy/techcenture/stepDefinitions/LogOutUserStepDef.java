@@ -10,7 +10,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
 public class LogOutUserStepDef {
-    private WebDriver driver = Driver.getDriver();
+    private final WebDriver driver = Driver.getDriver();
     private LoginPage loginPage;
     private HomePage homePage;
     @Given("user navigated to home page and page is visible")

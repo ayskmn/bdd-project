@@ -9,7 +9,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
 public class LogInWithExistEmailStepDef {
-    private WebDriver driver = Driver.getDriver();
+    private final WebDriver driver = Driver.getDriver();
     private HomePage homePage;
     private LoginPage logInPage;
     @Given("user is on the homePage")

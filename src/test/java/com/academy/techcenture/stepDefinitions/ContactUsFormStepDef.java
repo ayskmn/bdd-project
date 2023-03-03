@@ -19,8 +19,9 @@ public class ContactUsFormStepDef {
     private HomePage homePage;
     private ContactUsPage contactUsPage;
     @Given("user is on a Home Page and home page is visible")
-    public void user_is_on_a_home_page_and_home_page_is_visible() {
+    public void user_is_on_a_home_page_and_home_page_is_visible() throws InterruptedException{
         homePage = new HomePage(driver);
+//        homePage.closeAd();
         homePage.navigate_to_home_page();
         homePage.verifyUserIsOnAHomePage();
     }
