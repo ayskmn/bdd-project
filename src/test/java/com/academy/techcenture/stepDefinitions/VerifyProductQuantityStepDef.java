@@ -9,15 +9,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
 
 public class VerifyProductQuantityStepDef {
     private final WebDriver driver = Driver.getDriver();
     private HomePage homePage;
     private ProductPage productPage;
     private ProductDetailPage productDetailPage;
-
     private CartPage cartPage;
     @Given("the user is navigated to homepage")
     public void the_user_is_navigated_to_homepage() {

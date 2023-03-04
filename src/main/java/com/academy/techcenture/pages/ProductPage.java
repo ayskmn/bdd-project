@@ -40,6 +40,8 @@ public class ProductPage extends BasePage{
     private WebElement firstProductPrice;
     @FindBy(xpath="(//div[@class='single-products']/div/img/following-sibling::h2)[2]")
     private WebElement secondProductPrice;
+    @FindBy(xpath="//a[text()=' Cart']")
+    private WebElement cartLink;
 
 
     public void verifyUserOnAProductPage(){
@@ -71,12 +73,10 @@ public class ProductPage extends BasePage{
         Assert.assertTrue("View Cart link is not displayed", viewCartLink.isDisplayed());
         viewCartLink.click();
     }
-
     public void searchProduct(String str){
         searchProductInput.sendKeys(str);
         submitSearchBtn.click();
     }
-
     public void saveFirstPriceData(){
         String price1 = firstProductPrice.getText().trim();
         ConfigReader.setProperty("price1",price1);
@@ -96,7 +96,20 @@ public class ProductPage extends BasePage{
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,550)", "");
         int random = Utils.generateRandomNumber(1,3);
-        System.out.println("RANDOM NUMBER IS: "+ random);
         driver.findElement(By.xpath("(//div[@class='single-products']/following-sibling::div/ul/li/a)["+random+"]/i")).click();
+    }
+    public void addRandomProductToCart(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,550)", "");
+        int random = Utils.generateRandomNumber(1,3);
+        driver.findElement(By.xpath("(//a[@data-product-id='"+random+"' and text()='Add to cart']/i)[1]")).click();
+
+    }
+
+    public void clickOnCartAfterScrollingToTop(){
+        WebElement element = driver.findElement(By.tagName("header"));
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].scrollIntoView();", element);
+        cartLink.click();
     }
 }

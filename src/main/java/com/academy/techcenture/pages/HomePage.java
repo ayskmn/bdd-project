@@ -17,6 +17,7 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath = "//a[text()=' Signup / Login']")
     private WebElement singInSignUpButton;
+
     @FindBy(xpath = "//div[@id='dismiss-button']/div/span")
     private WebElement dismissBtn;
     @FindBy(xpath = "//iframe[@title='Advertisement']")

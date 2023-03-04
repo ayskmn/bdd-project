@@ -28,13 +28,10 @@ public class CartPage extends BasePage{
 
     @FindBy(xpath="//button[@id='subscribe']")
     private WebElement subscribeBtn;
-
     @FindBy(xpath="//tr[@id='product-1']/td[@class='cart_price']/p")
     private WebElement firstProductPrice;
-
     @FindBy(xpath="//tr[@id='product-2']/td[@class='cart_price']/p")
     private WebElement secondProductPrice;
-
     @FindBy(xpath="//div[@id='cart_info']/table/tbody/tr")
     private List<WebElement> productsInCart;
     @FindBy(xpath = "//tr[@id='product-1']/td[@class='cart_quantity']/button")
@@ -45,6 +42,13 @@ public class CartPage extends BasePage{
     private WebElement cartTotalFirstItem;
     @FindBy(xpath = "//tr[@id='product-2']/td[@class='cart_total']/p")
     private WebElement cartTotalSecondItem;
+
+    @FindBy(xpath = "//div/a[text()='Proceed To Checkout']")
+    private WebElement proceedToCheckoutBtn;
+
+    @FindBy(xpath="//div/p/following-sibling::p/a/u")
+    private WebElement registerLoginLink;
+
     public void verifySubscriptionTitleIsVisible(){
         Assert.assertTrue(subscriptionTitle.isDisplayed());
     }
@@ -74,7 +78,17 @@ public class CartPage extends BasePage{
         int cartTotal2 = Integer.parseInt(cart2.substring(cart2.length()-3));
         Assert.assertEquals("Total is not correct", cartTotal1, count1 * firstPrice);
         Assert.assertEquals("Total is not correct", cartTotal2, count2 * secondPrice);
-
+    }
+    public void verifyUserIsOnCartPage(){
+        Assert.assertTrue("Shopping Cart Text is not displayed", shoppingCartText.isDisplayed());
+    }
+    public void clickOnProceedToCheckoutBtn(){
+        Assert.assertTrue("proceed to checkout btn is not enabled", proceedToCheckoutBtn.isEnabled());
+        proceedToCheckoutBtn.click();
+    }
+    public void clickOnRegisterLinkAtCheckout(){
+        Assert.assertTrue("Login/Register link is not displayed", registerLoginLink.isDisplayed());
+        registerLoginLink.click();
     }
 
 }
