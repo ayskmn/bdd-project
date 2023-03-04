@@ -1,6 +1,7 @@
 package com.academy.techcenture.pages;
 
 import com.academy.techcenture.config.ConfigReader;
+import com.academy.techcenture.utils.Utils;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -39,6 +40,8 @@ public class ProductPage extends BasePage{
     private WebElement firstProductPrice;
     @FindBy(xpath="(//div[@class='single-products']/div/img/following-sibling::h2)[2]")
     private WebElement secondProductPrice;
+
+
     public void verifyUserOnAProductPage(){
         Assert.assertTrue("User is not on a product page",driver.getTitle().trim().equalsIgnoreCase("Automation Exercise - All Products"));
     }
@@ -89,5 +92,11 @@ public class ProductPage extends BasePage{
 
         }
     }
-
+    public void selectRandomProduct(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,550)", "");
+        int random = Utils.generateRandomNumber(1,3);
+        System.out.println("RANDOM NUMBER IS: "+ random);
+        driver.findElement(By.xpath("(//div[@class='single-products']/following-sibling::div/ul/li/a)["+random+"]/i")).click();
+    }
 }

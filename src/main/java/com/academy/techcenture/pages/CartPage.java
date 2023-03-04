@@ -2,6 +2,7 @@ package com.academy.techcenture.pages;
 
 import com.academy.techcenture.config.ConfigReader;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,7 +54,12 @@ public class CartPage extends BasePage{
         subscribeBtn.click();
     }
     public void verifyHowManyProductsInCart(int i){
-        Assert.assertTrue("The quility of the items were added are not correct",productsInCart.size()==i);
+        Assert.assertTrue("The quantity of the items were added are not correct",productsInCart.size()==i);
+    }
+    public void verifyQuantityOfSingleProduct(){
+        Assert.assertTrue("quantity is not equals to 4",
+                driver.findElement(By.xpath("//tr/td/button[text()='4']")).getText().trim()
+                        .equals(ConfigReader.getProperty("quantityOfProduct")));
     }
     public void verifyTotalPrice(){
         String first = firstProductPrice.getText().trim();
