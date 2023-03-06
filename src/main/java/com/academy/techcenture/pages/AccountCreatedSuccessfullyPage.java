@@ -13,7 +13,7 @@ public class AccountCreatedSuccessfullyPage extends BasePage{
     }
     @FindBy(tagName = "b")
     private WebElement accountCreatedText;
-    @FindBy(xpath = "//a[text()='Continue']")
+    @FindBy(xpath = "//section[@id='form']/div/div/div/div/a")
     private WebElement continueBtn;
 
     public void verifyNavigatedToAccountCreatedSuccessfullyPage(){

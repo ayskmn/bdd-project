@@ -22,7 +22,7 @@ public class HomePage extends BasePage{
     private WebElement dismissBtn;
     @FindBy(xpath = "//iframe[@title='Advertisement']")
     private WebElement iframe;
-    @FindBy(xpath = "//iframe[@id='aswift_5']")
+    @FindBy(xpath = "//iframe[@id='aswift_9']")
     private WebElement parentIframe;
     @FindBy(xpath = "//a[text()=' Logged in as ']")
     private WebElement loginAsUserText;

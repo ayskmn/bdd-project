@@ -25,7 +25,6 @@ public class Driver {
 
             if (browser.equalsIgnoreCase("chrome")) {
                 WebDriverManager.chromedriver().setup();
-//                driver = new ChromeDriver();
                 ChromeOptions options = new ChromeOptions();
                 Map<String, Object> prefs = new HashMap<String, Object>();
                 prefs.put("autofill.profile_enabled", false);

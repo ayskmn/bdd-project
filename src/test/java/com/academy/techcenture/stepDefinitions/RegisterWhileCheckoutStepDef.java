@@ -1,5 +1,6 @@
 package com.academy.techcenture.stepDefinitions;
 
+import com.academy.techcenture.config.ConfigReader;
 import com.academy.techcenture.driver.Driver;
 import com.academy.techcenture.pages.*;
 import io.cucumber.java.en.Given;
@@ -22,8 +23,9 @@ public class RegisterWhileCheckoutStepDef {
     private CartPage cartPage;
     private LoginPage loginPage;
     private Select select;
-
     private AccountCreatedSuccessfullyPage accountCreatedSuccessfullyPage;
+
+    private Checkout checkout;
 
 
     @Given("User verify that the home page is visible successfully")
@@ -73,12 +75,19 @@ public class RegisterWhileCheckoutStepDef {
         String year = userInfo.get("Year");
         String first_name = userInfo.get("First name");
         String last_name = userInfo.get("Last name");
+        ConfigReader.setProperty("firstName", first_name.trim());
+        ConfigReader.setProperty("lastName", last_name.trim());
+        ConfigReader.setProperty("title", title.trim());
         String address = userInfo.get("Address");
+        ConfigReader.setProperty("streetAddress", address);
         String country = userInfo.get("Country");
+        ConfigReader.setProperty("country", country);
         String state = userInfo.get("State");
         String city = userInfo.get("City");
         String zipcode = userInfo.get("Zipcode");
+        ConfigReader.setProperty("cityStateZip", city+" "+state+" "+zipcode);
         String mobile = userInfo.get("Mobile");
+        ConfigReader.setProperty("phoneNumber", mobile);
         WebElement country1 = driver.findElement(By.id("country"));
         driver.findElement(By.xpath("//label[text()='Title']/following-sibling::div/label/div/span/input[@value='"+title+"']")).click();
         driver.findElement(By.id("password")).sendKeys(password);
@@ -105,10 +114,9 @@ public class RegisterWhileCheckoutStepDef {
         loginPage.clickOnCreateAccountBtn();
     }
     @Then("User verify ACCOUNT CREATED! and click the Continue button")
-    public void user_verify_account_created_and_click_the_continue_button() throws InterruptedException{
+    public void user_verify_account_created_and_click_the_continue_button() {
         accountCreatedSuccessfullyPage = new AccountCreatedSuccessfullyPage(driver);
         accountCreatedSuccessfullyPage.verifyNavigatedToAccountCreatedSuccessfullyPage();
-        Thread.sleep(3000);
         accountCreatedSuccessfullyPage.clickOnContinueBtn();
     }
     @Then("User verify Logged in as username at the top")
@@ -118,23 +126,26 @@ public class RegisterWhileCheckoutStepDef {
     }
     @When("User clicks on the Cart btn after registering")
     public void user_clicks_on_the_cart_btn_after_registering() {
-
+        homePage.clickOnCartLink();
     }
     @When("User clicks on Proceed To Checkout button")
     public void user_clicks_on_proceed_to_checkout_button() {
-
+        cartPage = new CartPage(driver);
+        cartPage.clickOnProceedToCheckoutBtn();
     }
     @Then("User verify Address Details and Review Your Order")
     public void user_verify_address_details_and_review_your_order() {
+        checkout = new Checkout(driver);
+        checkout.verifyShippingInfo();
 
     }
     @When("User enters a description in the comment text area")
     public void user_enters_a_description_in_the_comment_text_area() {
-
+        checkout.makeACommentForTheOrder();
     }
     @When("User clicks on the Place Order button")
     public void user_clicks_on_the_place_order_button() {
-
+        checkout.clickOnPlaceOrderBtn();
     }
     @Then("User enter payment details: Name on Card, Card Number, CVC, Expiration date")
     public void user_enter_payment_details_name_on_card_card_number_cvc_expiration_date() {

@@ -10,6 +10,7 @@ Feature: Place Order: Register while Checkout
     And user fill details: <First name>, <Last name>, <Company>, <Address>, <Address2>, <Country>, <State>, <City>, <Zipcode>, <Mobile>
       |Title|Name     |Email           |Password|Date|Month|Year|First name|Last name|Company|Address        |Country      |State   |City  |Zipcode|Mobile    |
       |Mr   |Kevin Lee|kevlee@gmail.com|123Ken! |12  |May  |1988|Kevin     |Lee      |IPK GMB|123 main street|United States|Virginia|McLean|22102  |7031112233|
+    Then User verify ACCOUNT CREATED! and click the Continue button
     And User verify Logged in as username at the top
 
     When User clicks on the Cart btn after registering
