@@ -42,7 +42,11 @@ public class ProductPage extends BasePage{
     private WebElement secondProductPrice;
     @FindBy(xpath="//a[text()=' Cart']")
     private WebElement cartLink;
+    @FindBy(xpath="//div[@class='brands-name']")
+    private WebElement brandsLinkBox;
 
+    @FindBy(xpath="//div[@class='brands-name']/ul/li/a[text()='Babyhug']")
+    private WebElement babyHugLink;
 
     public void verifyUserOnAProductPage(){
         Assert.assertTrue("User is not on a product page",driver.getTitle().trim().equalsIgnoreCase("Automation Exercise - All Products"));
@@ -89,7 +93,6 @@ public class ProductPage extends BasePage{
         List<WebElement> products = driver.findElements(By.xpath("//p[contains(text(),'"+str+"')]/../../../../.."));
         for (int i = 0; i < products.size(); i++) {
             Assert.assertTrue("Product"+products.get(i)+"is not visible",products.get(i).isDisplayed());
-
         }
     }
     public void selectRandomProduct(){
@@ -112,4 +115,15 @@ public class ProductPage extends BasePage{
         js.executeScript("arguments[0].scrollIntoView();", element);
         cartLink.click();
     }
+
+    public void verifyBrandsAreVisible(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1100)", "");
+        Assert.assertTrue("Brands are not displayed on the left menu", brandsLinkBox.isDisplayed());
+    }
+    public void clickOnABrandLink(){
+        Assert.assertTrue("Babyhug link is not enabled", babyHugLink.isEnabled());
+        babyHugLink.click();
+    }
+
 }

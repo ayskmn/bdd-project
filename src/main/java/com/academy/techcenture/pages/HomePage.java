@@ -24,9 +24,7 @@ public class HomePage extends BasePage{
     private WebElement dismissBtn;
     @FindBy(xpath = "//iframe[@title='Advertisement']")
     private WebElement iframe;
-//    @FindBy(xpath = "//iframe[@id='aswift_9']")
-//    private WebElement parentIframe;
-    @FindBy(xpath="//iframe[@data-google-container-id='a!8']")
+    @FindBy(xpath = "//iframe[@id='aswift_5']")
     private WebElement parentIframe;
     @FindBy(xpath = "//a[text()=' Logged in as ']")
     private WebElement loginAsUserText;
@@ -39,21 +37,30 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath="//h2[text()='Subscription']")
     private WebElement subscriptionText;
-
     @FindBy(xpath="//input[@id='susbscribe_email']")
     private WebElement subscribeInput;
-
     @FindBy(xpath="//button[@id='subscribe']")
     private WebElement subscribeBtn;
-
     @FindBy(xpath="//div/div/div[contains(@class,  'alert-success')]")
     private WebElement successMsgBox;
-
     @FindBy(xpath="//a[text()=' Cart']")
     private WebElement cartLink;
-
     @FindBy(xpath="//button[text()='Continue Shopping']")
     private WebElement continueShoppingBtn;
+    @FindBy(xpath = "//div[@id='accordian']")
+    private WebElement categoryBox;
+    @FindBy(xpath="//div[@id='accordian']/div/div/h4/a[contains(.,'Women')]")
+    private WebElement womenLink;
+
+    @FindBy(xpath="//div[@id='accordian']/div/div/h4/a[contains(.,'Men')]")
+    private WebElement menLink;
+    @FindBy(xpath="//div[@id='Women']/div/ul/li/a[contains(text(), 'Dress')]")
+    private WebElement dressLink;
+
+    @FindBy(xpath="//div[@id='Men']/div/ul/li/a[contains(text(), 'Jeans')]")
+    private WebElement jeansLink;
+    @FindBy(xpath="//h2[text()='Women - Dress Products']")
+    private WebElement dressesHeader;
 
     public void clickOnSingInSignUpBtn(){
         singInSignUpButton.click();
@@ -118,6 +125,31 @@ public class HomePage extends BasePage{
         js.executeScript("window.scrollBy(0,550)", "");
         int random = Utils.generateRandomNumber(1,3);
         driver.findElement(By.xpath("//div[@class='single-products']/div/a[@data-product-id='"+random+"' and @class='btn btn-default add-to-cart']/i[1]")).click();
-
+    }
+    public void verifyCategoryIsDisplayed(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,550)", "");
+        Assert.assertTrue("Categories are not displayed", categoryBox.isDisplayed());
+    }
+    public void clickOnWomenCategory(){
+        Assert.assertTrue("WOMEN link is not enabled", womenLink.isEnabled());
+        womenLink.click();
+    }
+    public void clickOnDressLink(){
+        Assert.assertTrue("Dress link is not enabled", dressLink.isEnabled());
+        dressLink.click();
+    }
+    public void verifyDressPage(){
+        Assert.assertTrue("Dresses page is visible", dressesHeader.isDisplayed());
+    }
+    public void clickOnMenCategory(){
+        Assert.assertTrue("MEN link is not enabled", menLink.isEnabled());
+        menLink.click();
+        Assert.assertTrue("Jeans link is not enabled", jeansLink.isEnabled());
+        jeansLink.click();
+    }
+    public void verifyUserIsOnCategoryPage(){
+        String title = driver.getTitle();
+        Assert.assertTrue("Category page title is not correct", title.equalsIgnoreCase("Automation Exercise - Jeans Products"));
     }
 }

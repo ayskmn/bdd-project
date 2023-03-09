@@ -49,6 +49,12 @@ public class CartPage extends BasePage{
     @FindBy(xpath="//div/p/following-sibling::p/a/u")
     private WebElement registerLoginLink;
 
+    @FindBy(xpath="//tr[@id='product-1']/td[@class='cart_delete']/a")
+    private WebElement removeFirstProductBtn;
+
+    @FindBy(xpath = "//b[contains(text(), 'Cart is empty!')]")
+    private WebElement cartIsEmptyTxt;
+
     public void verifySubscriptionTitleIsVisible(){
         Assert.assertTrue(subscriptionTitle.isDisplayed());
     }
@@ -89,6 +95,13 @@ public class CartPage extends BasePage{
     public void clickOnRegisterLinkAtCheckout(){
         Assert.assertTrue("Login/Register link is not displayed", registerLoginLink.isDisplayed());
         registerLoginLink.click();
+    }
+    public void removeFirstProductFromCart(){
+        Assert.assertTrue("Remove btn is enabled", removeFirstProductBtn.isEnabled());
+        removeFirstProductBtn.click();
+    }
+    public void verifyCartIsEmpty(){
+        Assert.assertTrue("Cart is not empty", cartIsEmptyTxt.isDisplayed());
     }
 
 }
