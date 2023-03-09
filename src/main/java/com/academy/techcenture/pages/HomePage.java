@@ -1,8 +1,10 @@
 package com.academy.techcenture.pages;
 
 import com.academy.techcenture.config.ConfigReader;
+import com.academy.techcenture.utils.Utils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +24,9 @@ public class HomePage extends BasePage{
     private WebElement dismissBtn;
     @FindBy(xpath = "//iframe[@title='Advertisement']")
     private WebElement iframe;
-    @FindBy(xpath = "//iframe[@id='aswift_9']")
+//    @FindBy(xpath = "//iframe[@id='aswift_9']")
+//    private WebElement parentIframe;
+    @FindBy(xpath="//iframe[@data-google-container-id='a!8']")
     private WebElement parentIframe;
     @FindBy(xpath = "//a[text()=' Logged in as ']")
     private WebElement loginAsUserText;
@@ -47,6 +51,10 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath="//a[text()=' Cart']")
     private WebElement cartLink;
+
+    @FindBy(xpath="//button[text()='Continue Shopping']")
+    private WebElement continueShoppingBtn;
+
     public void clickOnSingInSignUpBtn(){
         singInSignUpButton.click();
     }
@@ -86,5 +94,30 @@ public class HomePage extends BasePage{
     }
     public void clickOnCartLink(){
         cartLink.click();
+    }
+
+    public void addProductsToCartOnTheHomepage() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,550)", "");
+        int random = Utils.generateRandomNumber(1,3);
+        driver.findElement(By.xpath("(//div[@class='single-products']/following-sibling::div/ul/li/a)["+random+"]/i")).click();
+        closeAd();
+    }
+
+    public void scrollUpToTopOfThePage(){
+        WebElement element = driver.findElement(By.tagName("header"));
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].scrollIntoView();", element);
+    }
+    public void continueShopping(){
+        Assert.assertTrue("Continue btn is not enabled",continueShoppingBtn.isEnabled());
+        continueShoppingBtn.click();
+    }
+    public void addRandomProductToCart(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,550)", "");
+        int random = Utils.generateRandomNumber(1,3);
+        driver.findElement(By.xpath("//div[@class='single-products']/div/a[@data-product-id='"+random+"' and @class='btn btn-default add-to-cart']/i[1]")).click();
+
     }
 }

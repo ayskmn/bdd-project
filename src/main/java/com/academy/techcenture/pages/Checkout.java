@@ -2,6 +2,7 @@ package com.academy.techcenture.pages;
 
 import com.academy.techcenture.config.ConfigReader;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +35,11 @@ public class Checkout extends BasePage{
     @FindBy(xpath = "//div/a[text()='Place Order']")
     private WebElement placeOrderBtn;
 
+    @FindBy(xpath="//iframe[@id='aswift_4']")
+    private WebElement parentIframe;
+
+    @FindBy(xpath = "//iframe[@title='Advertisement']")
+    private WebElement iframe;
     public void verifyShippingInfo(){
         String nameText = name.getText().trim();
         String streetAddressText = streetAddress.getText().trim();
@@ -50,9 +56,33 @@ public class Checkout extends BasePage{
         Assert.assertTrue("City/state/zip info is not correct", cityStateZipText.equalsIgnoreCase(expectedCityStateZip));
         Assert.assertTrue("Country is not correct", countryText.equalsIgnoreCase(expectedCountry));
         Assert.assertTrue("phone number is not correct", phoneNumberText.equalsIgnoreCase(expectedPhoneNum));
-
+    }
+    public void verifyShippingInfoForLogin(){
+        String nameText = name.getText().trim();
+        String streetAddressText = streetAddress.getText().trim();
+        String cityStateZipText = cityStateZip.getText().trim();
+        String countryText = country.getText().trim();
+        String phoneNumberText = phoneNumber.getText().trim();
+        String expectedName = ConfigReader.getProperty("shippingName");
+        String expectedAdd = ConfigReader.getProperty("shippingAddress");
+        String expectedStateZip = ConfigReader.getProperty("shippingStateZip");
+        String expectedCountry = ConfigReader.getProperty("shippingCountry");
+        String expectedPhoneNum = ConfigReader.getProperty("shippingPhone");
+        Assert.assertTrue("name doesn't match", nameText.equalsIgnoreCase(expectedName));
+        Assert.assertTrue("street address doesn't match", streetAddressText.equalsIgnoreCase(expectedAdd));
+        Assert.assertTrue("City/state/zip info is not correct", cityStateZipText.equalsIgnoreCase(expectedStateZip));
+        Assert.assertTrue("Country is not correct", countryText.equalsIgnoreCase(expectedCountry));
+        Assert.assertTrue("phone number is not correct", phoneNumberText.equalsIgnoreCase(expectedPhoneNum));
     }
 
+    public void closeAd() throws InterruptedException {
+        Thread.sleep(5000);
+        driver.switchTo().frame(parentIframe);
+        driver.switchTo().frame(iframe);
+        driver.findElement(By.xpath("//div[@id='dismiss-button']/div/span")).click();
+        driver.switchTo().defaultContent();
+        Thread.sleep(5000);
+    }
     public void makeACommentForTheOrder(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,800)", "");

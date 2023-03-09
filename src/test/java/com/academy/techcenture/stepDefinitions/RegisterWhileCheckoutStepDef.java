@@ -10,7 +10,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.Map;
@@ -24,8 +26,11 @@ public class RegisterWhileCheckoutStepDef {
     private LoginPage loginPage;
     private Select select;
     private AccountCreatedSuccessfullyPage accountCreatedSuccessfullyPage;
-
     private Checkout checkout;
+
+    private PaymentPage paymentPage;
+
+    private WebDriverWait wait;
 
 
     @Given("User verify that the home page is visible successfully")
@@ -149,14 +154,18 @@ public class RegisterWhileCheckoutStepDef {
     }
     @Then("User enter payment details: Name on Card, Card Number, CVC, Expiration date")
     public void user_enter_payment_details_name_on_card_card_number_cvc_expiration_date() {
-
+        paymentPage = new PaymentPage(driver);
+        paymentPage.enterCardInfo();
     }
     @Then("User clicks on the Pay and Confirm Order button")
     public void user_clicks_on_the_pay_and_confirm_order_button() {
+        paymentPage.clickOnPayBtn();
+        wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(text(), 'successfully')])[1]"))));
 
     }
     @Then("User verifies the success message Your order has been placed successfully!")
     public void user_verifies_the_success_message_your_order_has_been_placed_successfully() {
-
+        paymentPage.verifySuccessText();
     }
 }

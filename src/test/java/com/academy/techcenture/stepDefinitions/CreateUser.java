@@ -1,5 +1,6 @@
 package com.academy.techcenture.stepDefinitions;
 
+import com.academy.techcenture.config.ConfigReader;
 import com.academy.techcenture.driver.Driver;
 import com.academy.techcenture.pages.AccountCreatedSuccessfullyPage;
 import com.academy.techcenture.pages.LoginPage;
@@ -14,6 +15,7 @@ import com.academy.techcenture.pages.HomePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.ObjectInputFilter;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +62,7 @@ public class CreateUser {
         Map<String, String> userInfo =data.get(0);
         String password = userInfo.get("Password").trim();
         String title = userInfo.get("Title");
+        ConfigReader.setProperty("title1", title);
         String date = userInfo.get("Date").trim();
         String month = userInfo.get("Month").trim();
         String year = userInfo.get("Year");
@@ -93,13 +96,18 @@ public class CreateUser {
         Map<String, String> userInfo =data.get(0);
         String first_name = userInfo.get("First name");
         String last_name = userInfo.get("Last name");
+        ConfigReader.setProperty("fullName1", first_name+" "+last_name);
         String company = userInfo.get("Company");
         String address = userInfo.get("Address");
+        ConfigReader.setProperty("address1", address);
         String country = userInfo.get("Country");
+        ConfigReader.setProperty("country1", country);
         String state = userInfo.get("State");
         String city = userInfo.get("City");
         String zipcode = userInfo.get("Zipcode");
+        ConfigReader.setProperty("cityStateZipcode1", city+" "+state+" "+zipcode);
         String mobile = userInfo.get("Mobile");
+        ConfigReader.setProperty("mobile1", mobile);
         driver.findElement(By.id("first_name")).sendKeys(first_name);
         driver.findElement(By.id("last_name")).sendKeys(last_name);
         driver.findElement(By.id("company")).sendKeys(company);
