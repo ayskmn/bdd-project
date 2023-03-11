@@ -45,7 +45,6 @@ public class CartPage extends BasePage{
 
     @FindBy(xpath = "//div/a[text()='Proceed To Checkout']")
     private WebElement proceedToCheckoutBtn;
-
     @FindBy(xpath="//div/p/following-sibling::p/a/u")
     private WebElement registerLoginLink;
 
@@ -104,4 +103,8 @@ public class CartPage extends BasePage{
         Assert.assertTrue("Cart is not empty", cartIsEmptyTxt.isDisplayed());
     }
 
+    public void verifyFirstProductIsInCart(){
+        WebElement firstProduct = driver.findElement(By.xpath("//tr[@id='product-1']"));
+        Assert.assertTrue("First product is not displayed in cart", firstProduct.isDisplayed());
+    }
 }

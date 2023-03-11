@@ -44,9 +44,17 @@ public class ProductPage extends BasePage{
     private WebElement cartLink;
     @FindBy(xpath="//div[@class='brands-name']")
     private WebElement brandsLinkBox;
-
     @FindBy(xpath="//div[@class='brands-name']/ul/li/a[text()='Babyhug']")
     private WebElement babyHugLink;
+    @FindBy(xpath="//input[@id='search_product']")
+    private WebElement searchInput;
+    @FindBy(xpath="//button[@id='submit_search']")
+    private WebElement searchBtn;
+    @FindBy(xpath="//h2[text()='Searched Products']")
+    private WebElement searchedProductsHeader;
+
+    @FindBy(xpath = "(//ul/li/a[text()='View Product'])[1]")
+    private WebElement viewFirstProductBtn;
 
     public void verifyUserOnAProductPage(){
         Assert.assertTrue("User is not on a product page",driver.getTitle().trim().equalsIgnoreCase("Automation Exercise - All Products"));
@@ -115,6 +123,10 @@ public class ProductPage extends BasePage{
         js.executeScript("arguments[0].scrollIntoView();", element);
         cartLink.click();
     }
+    public void clickOnCartLink(){
+        Assert.assertTrue("Cart link in the navbar is not enabled", cartLink.isEnabled());
+        cartLink.click();
+    }
 
     public void verifyBrandsAreVisible(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -126,4 +138,50 @@ public class ProductPage extends BasePage{
         babyHugLink.click();
     }
 
+    public void searchProduct(){
+        Assert.assertTrue("Search input is not enabled", searchInput.isEnabled());
+        searchInput.click();
+        searchInput.sendKeys("Dress");
+        Assert.assertTrue("Search button is not enabled", searchBtn.isEnabled());
+        searchBtn.click();
+    }
+    public void scrollToTop(){
+        WebElement element = driver.findElement(By.tagName("header"));
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].scrollIntoView();", element);
+    }
+    public void verifySearchedProductsTitle(){
+        Assert.assertTrue("SEARCHED PRODUCTS header is not displayed", searchedProductsHeader.isDisplayed());
+    }
+    public void verifySearchProducts(String keyword){
+        List<WebElement> searchResults = driver.findElements(By.xpath
+                ("//div[@class='single-products']/div/img/following-sibling::h2/following-sibling::p[contains(., '"+keyword+"')]"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        for(int i=0;i<searchResults.size();i++){
+            js.executeScript("window.scrollBy(0,110)", "");
+            Assert.assertTrue("products are not displayed", searchResults.get(i).isDisplayed());
+            js.executeScript("window.scrollBy(0,310)", "");
+        }
+    }
+    public void addSearchProductsToCart() throws InterruptedException {
+        List<WebElement> addToCartBtns = driver.findElements(By.xpath("//p[contains(text(), 'Dress')]/following-sibling::a[text()='Add to cart']"));
+        for(int i=0; i<addToCartBtns.size(); i++){
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0,410)", "");
+            Thread.sleep(3000);
+            addToCartBtns.get(i).click();
+            clickOnContinueBtn();
+            js.executeScript("window.scrollBy(0,510)", "");
+            Thread.sleep(3000);
+            i++;
+        }
+        ConfigReader.setProperty("ProductsSize", String.valueOf(addToCartBtns.size()));
+    }
+
+    public void clickOnViewFirstProduct(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,410)", "");
+        Assert.assertTrue("View Product button is not enabled", viewFirstProductBtn.isEnabled());
+        viewFirstProductBtn.click();
+    }
 }

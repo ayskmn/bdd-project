@@ -9,11 +9,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage{
 
+    private final WebDriverWait wait;
+
     public HomePage(WebDriver driver) {
         super(driver);
+        this.wait =new WebDriverWait(driver, 14);
         PageFactory.initElements(driver,this);
     }
 
@@ -24,7 +29,7 @@ public class HomePage extends BasePage{
     private WebElement dismissBtn;
     @FindBy(xpath = "//iframe[@title='Advertisement']")
     private WebElement iframe;
-    @FindBy(xpath = "//iframe[@id='aswift_5']")
+    @FindBy(xpath = "//iframe[@id='aswift_6']")
     private WebElement parentIframe;
     @FindBy(xpath = "//a[text()=' Logged in as ']")
     private WebElement loginAsUserText;
@@ -34,7 +39,6 @@ public class HomePage extends BasePage{
     private WebElement testCasesBtn;
     @FindBy(xpath = "//a[text()=' Products']")
     private WebElement productsBtn;
-
     @FindBy(xpath="//h2[text()='Subscription']")
     private WebElement subscriptionText;
     @FindBy(xpath="//input[@id='susbscribe_email']")
@@ -51,16 +55,21 @@ public class HomePage extends BasePage{
     private WebElement categoryBox;
     @FindBy(xpath="//div[@id='accordian']/div/div/h4/a[contains(.,'Women')]")
     private WebElement womenLink;
-
     @FindBy(xpath="//div[@id='accordian']/div/div/h4/a[contains(.,'Men')]")
     private WebElement menLink;
     @FindBy(xpath="//div[@id='Women']/div/ul/li/a[contains(text(), 'Dress')]")
     private WebElement dressLink;
-
     @FindBy(xpath="//div[@id='Men']/div/ul/li/a[contains(text(), 'Jeans')]")
     private WebElement jeansLink;
     @FindBy(xpath="//h2[text()='Women - Dress Products']")
     private WebElement dressesHeader;
+    @FindBy(xpath="//h2[text()='recommended items']")
+    private WebElement recommendedItemsHeader;
+    @FindBy(xpath="//div[@id='recommended-item-carousel']")
+    private WebElement recommendedItemsCarousel;
+
+    @FindBy(xpath="(//div[@id='recommended-item-carousel']/div/div/div)[1]/div/div/div/a")
+    private WebElement addFirstRecommendedItemToCartBtn;
 
     public void clickOnSingInSignUpBtn(){
         singInSignUpButton.click();
@@ -151,5 +160,23 @@ public class HomePage extends BasePage{
     public void verifyUserIsOnCategoryPage(){
         String title = driver.getTitle();
         Assert.assertTrue("Category page title is not correct", title.equalsIgnoreCase("Automation Exercise - Jeans Products"));
+    }
+    public void scrollDownToRecommendedItems(){
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].scrollIntoView();", recommendedItemsHeader);
+    }
+    public void verifyRecommendedItemsHeader(){
+        Assert.assertTrue("Recommended items header is not displayed", recommendedItemsHeader.isDisplayed());
+    }
+    public void addRecommendedToCart(){
+        wait.until(ExpectedConditions.visibilityOf(addFirstRecommendedItemToCartBtn));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView", recommendedItemsCarousel);
+        Assert.assertTrue("First recommended item's add to cart btn is not displayed",
+                addFirstRecommendedItemToCartBtn.isDisplayed());
+        addFirstRecommendedItemToCartBtn.click();
+    }
+    public void clickOnViewCart(){
+        driver.findElement(By.xpath("//a/u[text()='View Cart']")).click();
     }
 }

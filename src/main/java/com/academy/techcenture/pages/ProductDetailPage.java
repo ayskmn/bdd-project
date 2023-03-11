@@ -30,6 +30,24 @@ public class ProductDetailPage extends BasePage{
     @FindBy(xpath="//p/a/u[text()='View Cart']")
     private WebElement viewCartLink;
 
+    @FindBy(xpath="//input[@id='name']")
+    private WebElement nameInput;
+
+    @FindBy(xpath = "//input[@id='email']")
+    private WebElement emailInput;
+
+    @FindBy(xpath="//textarea[@id='review']")
+    private WebElement reviewTextArea;
+
+    @FindBy(xpath = "//button[@id='button-review']")
+    private WebElement submitReviewBtn;
+
+    @FindBy(xpath="//a[text()='Write Your Review']")
+    private WebElement writeYourReviewText;
+
+    @FindBy(xpath="//div/span[text()='Thank you for your review.']")
+    private WebElement thankYouForYourReviewText;
+
     public void verifyUserIsOnProductDetailsPage(){
         Assert.assertTrue("User is not on a product details page",driver.getTitle().trim().equalsIgnoreCase("Automation Exercise - Product Details"));
     }
@@ -69,5 +87,22 @@ public class ProductDetailPage extends BasePage{
     public void clickOnViewCartLink(){
         Assert.assertTrue("View Cart link is not displayed", viewCartLink.isDisplayed());
         viewCartLink.click();
+    }
+    public void verifyWriteYourReviewText(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,410)", "");
+        Assert.assertTrue("Write your review text is not displayed", writeYourReviewText.isDisplayed() );
+    }
+    public void submitReviewForAProduct(){
+        nameInput.sendKeys(ConfigReader.getProperty("name"));
+        emailInput.sendKeys(ConfigReader.getProperty("email1"));
+        reviewTextArea.sendKeys("This product runs small.");
+    }
+    public void clickOnSubmitBtn(){
+        Assert.assertTrue("submit button is not enabled", submitReviewBtn.isEnabled());
+        submitReviewBtn.click();
+    }
+    public void verifyThankYouText(){
+        Assert.assertTrue("Thank you for your review txt is not displayed", thankYouForYourReviewText.isDisplayed());
     }
 }
