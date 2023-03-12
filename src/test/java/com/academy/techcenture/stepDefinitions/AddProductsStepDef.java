@@ -25,7 +25,7 @@ public class AddProductsStepDef {
     @Given("Click Products button")
     public void click_products_button() throws InterruptedException {
         homePage.clickOnProductBtn();
-        homePage.closeAd();
+//        homePage.closeAd();
     }
     @Then("Hover over first product and click Add to cart")
     public void hover_over_first_product_and_click_add_to_cart() {

@@ -5,6 +5,8 @@ Feature: Download Invoice after purchase order
     Then verify that cart page is displayed successfully
     And clicks on proceed to checkout button in the cart page
     Then clicks on Register Login button and creates a new account
+      |Title|Name     |Email           |Password|Date|Month|Year|First name|Last name|Company|Address        |Country      |State   |City  |Zipcode|Mobile    |
+      |Mr   |Kevin Lee|kevlee@gmail.com|123Ken! |12  |May  |1988|Kevin     |Lee      |IPK GMB|123 main street|United States|Virginia|McLean|22102  |7031112233|
     Then verifies the account created successfully page and clicks the continue button
     And verifies Logged in as username at top is displayed
     Then clicks on the cart link in the navbar

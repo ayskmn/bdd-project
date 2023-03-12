@@ -12,6 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class HomePage extends BasePage{
 
     private final WebDriverWait wait;
@@ -73,6 +75,12 @@ public class HomePage extends BasePage{
     private WebElement addFirstToCartBtn;
     @FindBy(xpath="(//a[@data-product-id='2' and text()='Add to cart'])[1]/i")
     private WebElement addSecondToCartBtn;
+    @FindBy(xpath="//footer")
+    private WebElement footer;
+    @FindBy(xpath="//a[@id='scrollUp']")
+    private WebElement scrollUpArrow;
+    @FindBy(xpath="(//h2[text()='Full-Fledged practice website for Automation Engineers'])[1]")
+    private WebElement fullFledgedCarouselText;
 
 
     public void clickOnSingInSignUpBtn(){
@@ -190,9 +198,21 @@ public class HomePage extends BasePage{
         continueShoppingBtn.click();
     }
     public void addSecondProductToCart(){
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("window.scrollBy(0,550)", "");
         addSecondToCartBtn.click();
     }
-
+    public void scrollDownToSubscribe(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", footer);
+    }
+    public void verifySubscribeText(){
+        Assert.assertTrue("Subscribe text is not displayed", subscriptionText.isDisplayed());
+    }
+    public void clickOnScrollUpArrow(){
+        Assert.assertTrue("scroll up arrow is not enabled", scrollUpArrow.isEnabled());
+        scrollUpArrow.click();
+    }
+    public void verifyCarouselText(){
+        wait.until(ExpectedConditions.visibilityOf(fullFledgedCarouselText));
+        Assert.assertTrue("Top text is not displayed", fullFledgedCarouselText.isDisplayed());
+    }
 }

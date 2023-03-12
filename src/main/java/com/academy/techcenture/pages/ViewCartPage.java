@@ -19,13 +19,13 @@ public class ViewCartPage extends BasePage{
     }
     @FindBy(xpath="//div[@class='breadcrumbs']/ol/li/following-sibling::li[text()='Shopping Cart']")
     private WebElement shoppingCartText;
-
     @FindBy(xpath="//tbody/tr")
     private List<WebElement> products;
-
     @FindBy(xpath = "//a[text()=' Signup / Login']")
     private WebElement signupLoginLink;
 
+    @FindBy(xpath="//a/u[text()='Register / Login']")
+    private WebElement registerLoginLink;
 
 
     public void verifyUserIsOnViewCartPage(){
@@ -60,6 +60,10 @@ public class ViewCartPage extends BasePage{
             js.executeScript("window.scrollBy(0,310)", "");
         }
         Assert.assertTrue("All products are not added to cart", products.size()==9);
+    }
+    public void clickOnRegisterLoginLink(){
+        Assert.assertTrue("Register/login link is not enabled", registerLoginLink.isEnabled());
+        registerLoginLink.click();
     }
 
 }

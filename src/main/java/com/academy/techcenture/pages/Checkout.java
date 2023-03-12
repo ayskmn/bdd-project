@@ -53,6 +53,8 @@ public class Checkout extends BasePage{
     @FindBy(xpath="(//li[contains(@class, 'address_phone')])[2]")
     private WebElement billingPhone;
 
+    @FindBy(xpath="//div[@id='cart_info']")
+    private WebElement reviewYourOrderItems;
 
     public void verifyShippingInfo(){
         String nameText = name.getText().trim();
@@ -113,5 +115,11 @@ public class Checkout extends BasePage{
 
     public void clickOnPlaceOrderBtn(){
         placeOrderBtn.click();
+    }
+
+    public void reviewYourOrder(){
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].scrollIntoView();", reviewYourOrderItems);
+        Assert.assertTrue("The review your orders list is not diplayed", reviewYourOrderItems.isDisplayed());
     }
 }
