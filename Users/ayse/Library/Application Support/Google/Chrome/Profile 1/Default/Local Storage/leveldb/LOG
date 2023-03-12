@@ -1,3 +1,6 @@
-2023/03/12-16:49:52.984 3803 Reusing MANIFEST /Users/ayse/IdeaProjects/bdd-project/Users/ayse/Library/Application Support/Google/Chrome/Profile 1/Default/Local Storage/leveldb/MANIFEST-000001
-2023/03/12-16:49:52.985 3803 Recovering log #4
-2023/03/12-16:49:52.987 3803 Reusing old log /Users/ayse/IdeaProjects/bdd-project/Users/ayse/Library/Application Support/Google/Chrome/Profile 1/Default/Local Storage/leveldb/000004.log 
+2023/03/12-16:59:57.701 2507 Reusing MANIFEST /Users/ayse/IdeaProjects/bdd-project/Users/ayse/Library/Application Support/Google/Chrome/Profile 1/Default/Local Storage/leveldb/MANIFEST-000001
+2023/03/12-16:59:57.702 2507 Recovering log #4
+2023/03/12-16:59:57.704 2507 Reusing old log /Users/ayse/IdeaProjects/bdd-project/Users/ayse/Library/Application Support/Google/Chrome/Profile 1/Default/Local Storage/leveldb/000004.log 
+2023/03/12-17:00:24.840 3303 Level-0 table #8: started
+2023/03/12-17:00:24.846 3303 Level-0 table #8: 20740 bytes OK
+2023/03/12-17:00:24.856 3303 Delete type=0 #4

@@ -34,4 +34,13 @@ public class VerifyScrollingStepDef {
         homePage.verifyCarouselText();
     }
 
+    @Then("Scroll up page to top")
+    public void scroll_up_page_to_top() {
+        homePage.scrollUpToTopOfThePage();
+    }
+    @Then("Verify that page is scrolled up and Full-Fledged practice website for Automation Engineers text is visible")
+    public void verify_that_page_is_scrolled_up_and_full_fledged_practice_website_for_automation_engineers_text_is_visible() {
+        homePage.verifyCarouselText();
+    }
+
 }
