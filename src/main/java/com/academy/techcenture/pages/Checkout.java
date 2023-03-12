@@ -16,30 +16,44 @@ public class Checkout extends BasePage{
     }
     @FindBy(xpath="//ul[@id='address_delivery']/li[2]")
     private WebElement name;
-
     @FindBy(xpath="//ul[@id='address_delivery']/li[4]")
     private WebElement streetAddress;
-
     @FindBy(xpath="//ul[@id='address_delivery']/li[6]")
     private WebElement cityStateZip;
-
     @FindBy(xpath="//ul[@id='address_delivery']/li[7]")
     private WebElement country;
-
     @FindBy(xpath="//ul[@id='address_delivery']/li[8]")
     private WebElement phoneNumber;
-
     @FindBy(xpath = "//textarea")
     private WebElement commentTextBox;
-
     @FindBy(xpath = "//div/a[text()='Place Order']")
     private WebElement placeOrderBtn;
-
     @FindBy(xpath="//iframe[@id='aswift_4']")
     private WebElement parentIframe;
-
     @FindBy(xpath = "//iframe[@title='Advertisement']")
     private WebElement iframe;
+    @FindBy(xpath="(//li[contains(@class, 'address_firstname')])[1]")
+    private WebElement shippingName;
+    @FindBy(xpath="(//li[contains(@class, 'address_firstname')])[2]")
+    private WebElement billingName;
+    @FindBy(xpath="(//li[contains(@class, 'address_address1')])[2]")
+    private WebElement shippingAdd1;
+    @FindBy(xpath="(//li[contains(@class, 'address_address1')])[5]")
+    private WebElement billingAdd1;
+    @FindBy(xpath="(//li[contains(@class, 'address_city')])[1]")
+    private WebElement shippingAddressCity;
+    @FindBy(xpath="(//li[contains(@class, 'address_city')])[2]")
+    private WebElement billingAddressCity;
+    @FindBy(xpath="(//li[contains(@class, 'address_country')])[1]")
+    private WebElement shippingCountry;
+    @FindBy(xpath="(//li[contains(@class, 'address_country')])[2]")
+    private WebElement billingCountry;
+    @FindBy(xpath="(//li[contains(@class, 'address_phone')])[1]")
+    private WebElement shippingPhone;
+    @FindBy(xpath="(//li[contains(@class, 'address_phone')])[2]")
+    private WebElement billingPhone;
+
+
     public void verifyShippingInfo(){
         String nameText = name.getText().trim();
         String streetAddressText = streetAddress.getText().trim();
@@ -56,6 +70,13 @@ public class Checkout extends BasePage{
         Assert.assertTrue("City/state/zip info is not correct", cityStateZipText.equalsIgnoreCase(expectedCityStateZip));
         Assert.assertTrue("Country is not correct", countryText.equalsIgnoreCase(expectedCountry));
         Assert.assertTrue("phone number is not correct", phoneNumberText.equalsIgnoreCase(expectedPhoneNum));
+    }
+    public void verifyBillingInfo(){
+        Assert.assertTrue(shippingName.getText().equalsIgnoreCase(billingName.getText()));
+        Assert.assertTrue(shippingAdd1.getText().equalsIgnoreCase(billingAdd1.getText()));
+        Assert.assertTrue(shippingAddressCity.getText().equalsIgnoreCase(billingAddressCity.getText()));
+        Assert.assertTrue(shippingCountry.getText().equalsIgnoreCase(billingCountry.getText()));
+        Assert.assertTrue(shippingPhone.getText().equalsIgnoreCase(billingPhone.getText()));
     }
     public void verifyShippingInfoForLogin(){
         String nameText = name.getText().trim();

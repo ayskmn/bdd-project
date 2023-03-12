@@ -67,9 +67,13 @@ public class HomePage extends BasePage{
     private WebElement recommendedItemsHeader;
     @FindBy(xpath="//div[@id='recommended-item-carousel']")
     private WebElement recommendedItemsCarousel;
-
     @FindBy(xpath="(//div[@id='recommended-item-carousel']/div/div/div)[1]/div/div/div/a")
     private WebElement addFirstRecommendedItemToCartBtn;
+    @FindBy(xpath="(//a[@data-product-id='1' and text()='Add to cart'])[1]/i")
+    private WebElement addFirstToCartBtn;
+    @FindBy(xpath="(//a[@data-product-id='2' and text()='Add to cart'])[1]/i")
+    private WebElement addSecondToCartBtn;
+
 
     public void clickOnSingInSignUpBtn(){
         singInSignUpButton.click();
@@ -179,4 +183,16 @@ public class HomePage extends BasePage{
     public void clickOnViewCart(){
         driver.findElement(By.xpath("//a/u[text()='View Cart']")).click();
     }
+    public void addFirstProductToCart(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,550)", "");
+        addFirstToCartBtn.click();
+        continueShoppingBtn.click();
+    }
+    public void addSecondProductToCart(){
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("window.scrollBy(0,550)", "");
+        addSecondToCartBtn.click();
+    }
+
 }

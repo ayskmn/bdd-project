@@ -30,6 +30,7 @@ public class Driver {
                 prefs.put("autofill.profile_enabled", false);
                 prefs.put("profile.password_manager_enabled", false);
                 prefs.put("profile.default_content_setting_values.notifications", 2);
+                options.addArguments("/Users/ayse/Library/Application Support/Google/Chrome/Profile 1");
                 options.setExperimentalOption("prefs", prefs);
                 driver = new ChromeDriver(options);
             } else if (browser.equalsIgnoreCase("firefox")) {

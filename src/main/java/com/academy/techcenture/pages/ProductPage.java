@@ -52,7 +52,6 @@ public class ProductPage extends BasePage{
     private WebElement searchBtn;
     @FindBy(xpath="//h2[text()='Searched Products']")
     private WebElement searchedProductsHeader;
-
     @FindBy(xpath = "(//ul/li/a[text()='View Product'])[1]")
     private WebElement viewFirstProductBtn;
 
