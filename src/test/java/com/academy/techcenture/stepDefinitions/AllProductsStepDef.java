@@ -15,16 +15,14 @@ public class AllProductsStepDef {
     private ProductPage productPage;
     private ProductDetailPage productDetailPage;
     @Given("user is on the HomePage")
-    public void user_is_on_the_home_page() throws InterruptedException {
+    public void user_is_on_the_home_page() {
         homePage = new HomePage(driver);
-//        homePage.closeAd();
         homePage.navigate_to_home_page();
         homePage.verifyUserIsOnAHomePage();
     }
     @When("user Clicks on Products button")
-    public void user_clicks_on_products_button() throws InterruptedException {
+    public void user_clicks_on_products_button() {
         homePage.clickOnProductBtn();
-        homePage.closeAd();
     }
     @Then("Verify user is navigated to ALL PRODUCTS page successfully")
     public void verify_user_is_navigated_to_all_products_page_successfully() {

@@ -23,16 +23,14 @@ public class AddProductsStepDef {
         homePage.verifyUserIsOnAHomePage();
     }
     @Given("Click Products button")
-    public void click_products_button() throws InterruptedException {
+    public void click_products_button()  {
         homePage.clickOnProductBtn();
-//        homePage.closeAd();
     }
     @Then("Hover over first product and click Add to cart")
     public void hover_over_first_product_and_click_add_to_cart() {
         productPage = new ProductPage(driver);
         productPage.saveFirstPriceData();
         productPage.addFirstProductToCart();
-
     }
     @When("Click Continue Shopping button")
     public void click_continue_shopping_button() {
@@ -52,7 +50,6 @@ public class AddProductsStepDef {
     public void verify_both_products_are_added_to_cart() {
         cartPage = new CartPage(driver);
         cartPage.verifyHowManyProductsInCart(2);
-
     }
     @Then("Verify their prices, quantity and total price")
     public void verify_their_prices_quantity_and_total_price() {

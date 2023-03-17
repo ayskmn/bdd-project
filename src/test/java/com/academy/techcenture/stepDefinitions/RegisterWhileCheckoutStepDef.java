@@ -42,7 +42,6 @@ public class RegisterWhileCheckoutStepDef {
     @Then("Useradd products to cart")
     public void useradd_products_to_cart() throws InterruptedException{
         homePage.clickOnProductBtn();
-        homePage.closeAd();
         productPage = new ProductPage(driver);
         productPage.addFirstProductToCart();
         productPage.clickOnContinueBtn();

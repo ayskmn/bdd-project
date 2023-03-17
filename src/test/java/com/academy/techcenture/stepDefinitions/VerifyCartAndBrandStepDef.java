@@ -25,7 +25,7 @@ public class VerifyCartAndBrandStepDef {
     @Then("Click on Products button in the navigation menu on the homepage")
     public void click_on_products_button_on_the_homepage() throws InterruptedException {
         homePage.clickOnProductBtn();
-        homePage.closeAd();
+
     }
     @Then("Verify that Brands are visible on left side bar")
     public void verify_that_brands_are_visible_on_left_side_bar() {

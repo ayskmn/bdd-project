@@ -26,7 +26,6 @@ public class AddReviewToProductStepDef {
     @Then("user goes to product link and navigated to ALL PRODUCTS page successfully")
     public void user_goes_to_product_link_and_navigated_to_all_products_page_successfully() throws InterruptedException {
         homePage.clickOnProductBtn();
-        homePage.closeAd();
         productPage = new ProductPage(driver);
     }
     @Then("clicks on view product to navigate to that products page")

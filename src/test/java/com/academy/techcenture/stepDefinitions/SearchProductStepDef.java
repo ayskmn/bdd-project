@@ -21,9 +21,8 @@ public class SearchProductStepDef {
        homePage.verifyUserIsOnAHomePage();
     }
     @When("user Click on Products button")
-    public void user_click_on_products_button() throws InterruptedException {
+    public void user_click_on_products_button() {
         homePage.clickOnProductBtn();
-        homePage.closeAd();
     }
     @When("user Verify user is navigated to ALL PRODUCTS page successfully")
     public void user_verify_user_is_navigated_to_all_products_page_successfully() {
@@ -33,12 +32,9 @@ public class SearchProductStepDef {
     @When("user Enter product name in search input and click search button")
     public void user_enter_product_name_in_search_input_and_click_search_button() {
         productPage.searchProduct(ConfigReader.getProperty("product"));
-
-
     }
     @Then("user Verify SEARCHED PRODUCTS is visible")
     public void user_verify_searched_products_is_visible() {
-
        productPage.verifyAllProductsIsVisible();
     }
     @Then("user Verify all the products related to search are visible")

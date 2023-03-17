@@ -26,7 +26,7 @@ public class VerifyProductQuantityStepDef {
     @Given("Click View Product for any product on home page")
     public void click_view_product_for_any_product_on_home_page() throws InterruptedException {
         homePage.clickOnProductBtn();
-        homePage.closeAd();
+
     }
     @When("Verify product detail is opened")
     public void verify_product_detail_is_opened() {

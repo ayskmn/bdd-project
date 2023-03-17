@@ -26,7 +26,7 @@ public class CategoryProductsStepDef {
     @Then("Click on any category link under Women category, for example, Dress")
     public void click_on_any_category_link_under_women_category_for_example_dress() throws InterruptedException {
         homePage.clickOnDressLink();
-        homePage.closeAd();
+
     }
     @Then("Verify that category page is displayed and confirm text WOMEN - TOPS PRODUCTS")
     public void verify_that_category_page_is_displayed_and_confirm_text_women_tops_products(){

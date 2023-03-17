@@ -101,14 +101,14 @@ public class HomePage extends BasePage{
     public void clickOnProductBtn(){
         productsBtn.click();
     }
-    public void closeAd() throws InterruptedException {
-        Thread.sleep(5000);
-        driver.switchTo().frame(parentIframe);
-        driver.switchTo().frame(iframe);
-        driver.findElement(By.xpath("//div[@id='dismiss-button']/div/span")).click();
-        driver.switchTo().defaultContent();
-        Thread.sleep(5000);
-    }
+//    public void closeAd() throws InterruptedException {
+//        Thread.sleep(5000);
+//        driver.switchTo().frame(parentIframe);
+//        driver.switchTo().frame(iframe);
+//        driver.findElement(By.xpath("//div[@id='dismiss-button']/div/span")).click();
+//        driver.switchTo().defaultContent();
+//        Thread.sleep(5000);
+//    }
 
     public void verifySubscriptionText(){
         Assert.assertTrue(subscriptionText.isDisplayed());
@@ -129,7 +129,7 @@ public class HomePage extends BasePage{
         js.executeScript("window.scrollBy(0,550)", "");
         int random = Utils.generateRandomNumber(1,3);
         driver.findElement(By.xpath("(//div[@class='single-products']/following-sibling::div/ul/li/a)["+random+"]/i")).click();
-        closeAd();
+
     }
 
     public void scrollUpToTopOfThePage(){

@@ -22,6 +22,8 @@ public class Driver {
 
             int pageLoadTime = Integer.parseInt(ConfigReader.getProperty("pageLoadTime"));
             int implicitWait = Integer.parseInt(ConfigReader.getProperty("implicitWait"));
+            boolean headless = Boolean.parseBoolean(ConfigReader.getProperty("headless"));
+
 
             if (browser.equalsIgnoreCase("chrome")) {
                 WebDriverManager.chromedriver().setup();
@@ -32,6 +34,12 @@ public class Driver {
                 prefs.put("profile.default_content_setting_values.notifications", 2);
                 options.addArguments("user-data-dir=Users/ayse/Library/Application Support/Google/Chrome/Profile 1");
                 options.setExperimentalOption("prefs", prefs);
+                //for headless mode
+//                options.addArguments("--headless");
+//                options.addArguments("--window-size=1920,1080");
+//                options.addArguments("--start-maximized");
+//                options.addArguments("--disable-gpu");
+//                options.setHeadless(headless);
                 driver = new ChromeDriver(options);
             } else if (browser.equalsIgnoreCase("firefox")) {
                 WebDriverManager.firefoxdriver().setup();

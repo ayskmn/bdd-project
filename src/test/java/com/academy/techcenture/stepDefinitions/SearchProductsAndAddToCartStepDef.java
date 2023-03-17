@@ -24,9 +24,8 @@ public class SearchProductsAndAddToCartStepDef {
         homePage.verifyUserIsOnAHomePage();
     }
     @When("user clicks on products button user lands on the all products page")
-    public void user_clicks_on_products_button_user_lands_on_the_all_products_page() throws InterruptedException {
+    public void user_clicks_on_products_button_user_lands_on_the_all_products_page()  {
         homePage.clickOnProductBtn();
-        homePage.closeAd();
     }
     @When("Enter product name in search input and click search button")
     public void enter_product_name_in_search_input_and_click_search_button() {
